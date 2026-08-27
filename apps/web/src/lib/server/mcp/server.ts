@@ -64,7 +64,7 @@ export function createNotesMcpHandler(context: NotesMcpContext) {
 			{
 				title: 'Create note',
 				description: 'Create a note owned by the currently authenticated user.',
-					inputSchema: z.object({ content: z.string().trim().min(1).max(10_000) }),
+				inputSchema: z.object({ content: z.string().trim().min(1).max(10_000) }),
 				outputSchema: z.object({ note: noteSchema }),
 				annotations: writeAnnotations
 			},
