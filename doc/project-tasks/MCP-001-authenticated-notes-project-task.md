@@ -90,7 +90,7 @@ Prove the authenticated SaaS path from ChatGPT through OAuth 2.1 and an MCP serv
 - [x] SvelteKit auth/consent/notes UI
 - [x] OAuth metadata and MCP server
 - [x] Validation and security review
-- [x] PR and reviewer handoff
+- [ ] PR and reviewer handoff
 - [ ] Dev integration
 - [ ] Release note
 
@@ -104,7 +104,7 @@ Prove the authenticated SaaS path from ChatGPT through OAuth 2.1 and an MCP serv
 
 ## Handoff
 
-- **Commit/PR**: Pending
+- **Commit/PR**: `efe35dc`, `60facc6`, `c8fa028`; PR pending
 - **Branch/Worktree**: `feat/MCP-001-authenticated-notes` at `/Users/ericzhan/Documents/side-projects/mcp-saas-demo-worktrees/MCP-001-authenticated-notes`
 - **Validation**: Local automated and browser validation complete; live OAuth and two-user RLS validation pending.
 - **Known issues**: Live Supabase/Vercel/ChatGPT configuration requires the project owner's authenticated dashboard access. Existing template CMS/editor files still emit non-blocking lint and Svelte accessibility warnings.
