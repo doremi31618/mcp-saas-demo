@@ -24,8 +24,12 @@ The publishable key is intended for browser use. Do not add a service-role key o
 In **SQL Editor**, open and run the contents of:
 
 ```text
-supabase/migrations/20260827000000_create_notes.sql
+apps/web/supabase/migrations/20260827000000_create_notes.sql
 ```
+
+This migration belongs to the independently deployed MCP web demo. Keep it under
+`apps/web/supabase`; it does not replace or extend the template backend's Drizzle
+migration history in `apps/migrator`.
 
 Then verify in **Database → Tables → notes**:
 

@@ -3,7 +3,7 @@
 > **Work Item ID**: MCP-001
 > **Project Task**: `doc/project-tasks/MCP-001-authenticated-notes-project-task.md`
 > **Status**: Approved for implementation
-> **Last updated**: 2026-08-27
+> **Last updated**: 2026-08-28
 
 ## 1. Deployment Architecture
 
@@ -26,6 +26,20 @@ ChatGPT                                  Browser
 ```
 
 Only `apps/web` is deployed for this MVP. The existing NestJS API and its PostgreSQL/MinIO dependencies remain unchanged and are not runtime dependencies of the demo.
+
+The canonical MVP-owned layout is:
+
+```text
+apps/web/
+├── src/                         SvelteKit UI, OAuth, notes, and MCP routes
+├── supabase/
+│   └── migrations/              Supabase notes table and RLS history
+└── vercel.json                  Web deployment configuration
+```
+
+`apps/web/supabase/migrations` is an explicit boundary for this independently
+deployed Supabase demo. It does not modify or replace the template backend's
+canonical Drizzle history in `apps/migrator/drizzle`.
 
 ## 2. Route Contract
 
