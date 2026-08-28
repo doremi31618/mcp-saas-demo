@@ -1,0 +1,3 @@
+{
+	"buildCommand": "cd ../.. && bun run build:packages && bun run --filter '@platform/web' build"
+}

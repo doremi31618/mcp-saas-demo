@@ -1,77 +1,63 @@
-# monorepo-system-template
+# Authenticated MCP SaaS Demo
 
-A capability-oriented full-stack platform built with SvelteKit, NestJS, Drizzle, PostgreSQL, and Bun workspaces.
-
-## What is included
-
-- Email/password and Google authentication, sessions, refresh rotation, and password reset
-- Users and role-based access control
-- Asset storage and CMS capabilities
-- Reusable Svelte UI components and Storybook
-- One Drizzle migration history and a Docker development stack
-
-## Repository layout
+A focused SvelteKit MVP proving this path end to end:
 
 ```text
-apps/
-├── api/          # NestJS composition root and HTTP API
-├── web/          # SvelteKit routes and application UI
-├── migrator/     # Canonical Drizzle configuration and migrations
-└── storybook/    # UI development and documentation
-
-packages/
-├── contracts/    # Shared API types and validation contracts
-├── sdk/          # Browser/API client helpers
-├── ui/           # Packaged Svelte components
-├── config/       # Typed application configuration
-├── logger/       # Nest logger integration
-├── database/     # Database factory and repository primitives
-├── test-utils/   # Shared test helpers
-├── users/
-├── mail/
-├── scheduling/
-├── auth/
-├── access-control/
-├── assets/
-└── cms/
+ChatGPT → Supabase OAuth 2.1 → SvelteKit MCP server → PostgreSQL RLS → user-owned notes
 ```
 
-Every internal dependency uses `workspace:*`. Packages expose ordinary `dist`-based package exports; no TypeScript path aliases or custom export conditions are required.
+The demo exposes three MCP tools:
 
-## Getting started
+- `who_am_i()`
+- `create_note(content)`
+- `list_notes()`
 
-Requirements: Bun 1.3+, Node.js 22.12+ for the NestJS production runtime, and Docker when running the full local stack.
+It also includes email/password signup and login, an OAuth consent screen, and a web page for creating and reading the same private notes. The original NestJS auth, CMS, and other template capabilities remain in the repository but are not part of this deployment.
+
+## Local development
+
+Requirements: Bun 1.3+ and Node.js 22.12+.
 
 ```bash
 bun install --frozen-lockfile
-cp apps/api/.env.example apps/api/.env
-bun run dev
+cp apps/web/.env.example apps/web/.env.local
+bun run build:packages
+bun run dev:web
 ```
 
-Or start the full stack:
+Required web environment variables:
+
+```text
+PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
+PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+PUBLIC_APP_URL=http://localhost:5173
+```
+
+Apply [the Supabase migration](apps/web/supabase/migrations/20260827000000_create_notes.sql) before testing notes.
+
+## Verification
 
 ```bash
-docker compose up --build
+bun run --filter '@platform/web' test
+bun run build:packages
+bun run --filter '@platform/web' check
+bun run --filter '@platform/web' build
 ```
 
-- Web: `http://localhost:5173`
-- API: `http://localhost:3333/v1`
-- OpenAPI: `http://localhost:3333/openapi`
-- Storybook: `bun run --filter @platform/storybook dev`
+## Deployment
 
-## Common commands
+Follow the exact dashboard checklist in [Authenticated MCP deployment setup](doc/onboarding/mcp-authenticated-notes-deployment.md).
 
-```bash
-bun run check
-bun run test
-bun run build
-bun run lint
+Implementation decisions and acceptance criteria are documented in:
 
-bun run db:generate
-bun run db:migrate
-bun run db:studio
+- [Project Task](doc/project-tasks/MCP-001-authenticated-notes-project-task.md)
+- [Product specification](doc/system-spec/MCP-001-authenticated-notes/product-spec.md)
+- [Technical specification](doc/system-spec/MCP-001-authenticated-notes/technical-spec.md)
+
+## Repository structure
+
+```text
+apps/web/       SvelteKit web UI, OAuth consent, MCP endpoint, and its Supabase migration
+packages/ui/    Existing reusable Svelte UI primitives
+doc/            Task, product, technical, and deployment documentation
 ```
-
-Drizzle migrations in `apps/migrator/drizzle` are the only canonical migration history. Feature packages own their schema definitions; the API composition root assembles them into one runtime schema.
-
-See [capability-platform.md](doc/system-spec/architecture/capability-platform.md) for dependency rules and [how-to-start-dev-env.md](doc/onboarding/how-to-start-dev-env.md) for daily workflows.
