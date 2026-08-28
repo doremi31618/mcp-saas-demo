@@ -33,7 +33,7 @@ PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 PUBLIC_APP_URL=http://localhost:5173
 ```
 
-Apply [the Supabase migration](supabase/migrations/20260827000000_create_notes.sql) before testing notes.
+Apply [the Supabase migration](apps/web/supabase/migrations/20260827000000_create_notes.sql) before testing notes.
 
 ## Verification
 
@@ -57,8 +57,7 @@ Implementation decisions and acceptance criteria are documented in:
 ## Repository structure
 
 ```text
-apps/web/       SvelteKit web UI, OAuth consent, and MCP endpoint
+apps/web/       SvelteKit web UI, OAuth consent, MCP endpoint, and its Supabase migration
 packages/ui/    Existing reusable Svelte UI primitives
-supabase/       Notes table and RLS migration for this MVP
 doc/            Task, product, technical, and deployment documentation
 ```

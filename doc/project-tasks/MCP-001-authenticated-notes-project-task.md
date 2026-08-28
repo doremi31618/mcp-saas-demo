@@ -1,16 +1,16 @@
 # Authenticated MCP Notes Project Task
 
 > **Work Item ID**: MCP-001
-> **Status**: Ready for live configuration
+> **Status**: Ready for review — migration layout correction
 > **Actor**: Codex
 > **Role**: Owner
-> **Branch**: `feat/MCP-001-authenticated-notes`
-> **Base**: `dev` (`origin/dev` at `14c3b06`)
-> **Worktree**: `/Users/ericzhan/Documents/side-projects/mcp-saas-demo-worktrees/MCP-001-authenticated-notes`
-> **PR**: Pending (`feat/MCP-001-authenticated-notes` -> `dev`)
+> **Branch**: `feat/MCP-001-web-supabase-layout`
+> **Base**: `dev` (`origin/dev` at `fa2dc7b`)
+> **Worktree**: `/Users/ericzhan/Documents/side-projects/mcp-saas-demo-worktrees/MCP-001-web-supabase-layout`
+> **PR**: Original implementation merged in PR #1; layout correction pending
 > **Related Spec**: `doc/system-spec/MCP-001-authenticated-notes/product-spec.md`, `doc/system-spec/MCP-001-authenticated-notes/technical-spec.md`
 > **Release**: Pending
-> **Last updated**: 2026-08-27
+> **Last updated**: 2026-08-28
 
 ## Objective
 
@@ -87,11 +87,13 @@ Prove the authenticated SaaS path from ChatGPT through OAuth 2.1 and an MCP serv
 - [x] Product and technical specifications
 - [x] Test-first implementation
 - [x] Supabase migration and configuration guide
+- [x] Keep the MCP demo's Supabase migration under `apps/web/supabase/migrations`
 - [x] SvelteKit auth/consent/notes UI
 - [x] OAuth metadata and MCP server
 - [x] Validation and security review
-- [ ] PR and reviewer handoff
-- [ ] Dev integration
+- [x] Original implementation PR and reviewer handoff
+- [x] Original implementation integrated into `dev`
+- [ ] Migration layout correction PR and reviewer handoff
 - [ ] Release note
 
 ## Decisions and Work Log
@@ -101,11 +103,13 @@ Prove the authenticated SaaS path from ChatGPT through OAuth 2.1 and an MCP serv
 - 2026-08-27: Chose a fixed Vercel production URL and one production Supabase project with default deployment settings.
 - 2026-08-27: Preserved the copied template folder and created an independent repository at `git@github.com:doremi31618/mcp-saas-demo.git`.
 - 2026-08-27: Completed 13 focused tests, Svelte type checking, lint, Vercel production build, OAuth HTTP smoke checks, and browser verification of the home/login routes.
+- 2026-08-28: Moved the MCP demo migration from the repository root to `apps/web/supabase/migrations` so the migration is owned by the only deployed MVP app. The SQL behavior is unchanged.
+- 2026-08-28: Grill Me and TDD were skipped with explicit owner approval because this correction only changes file ownership and documentation, not runtime behavior.
 
 ## Handoff
 
-- **Commit/PR**: `efe35dc`, `60facc6`, `c8fa028`; PR pending
-- **Branch/Worktree**: `feat/MCP-001-authenticated-notes` at `/Users/ericzhan/Documents/side-projects/mcp-saas-demo-worktrees/MCP-001-authenticated-notes`
-- **Validation**: Local automated and browser validation complete; live OAuth and two-user RLS validation pending.
+- **Commit/PR**: Original implementation merged in PR #1; layout correction PR pending
+- **Branch/Worktree**: `feat/MCP-001-web-supabase-layout` at `/Users/ericzhan/Documents/side-projects/mcp-saas-demo-worktrees/MCP-001-web-supabase-layout`
+- **Validation**: Migration SQL SHA-256 is unchanged; 13/13 focused tests, workspace package build, Svelte check (0 errors), and Vercel production build pass. Live OAuth and two-user RLS validation remain pending.
 - **Known issues**: Live Supabase/Vercel/ChatGPT configuration requires the project owner's authenticated dashboard access. Existing template CMS/editor files still emit non-blocking lint and Svelte accessibility warnings.
-- **Next action**: Apply the documented Supabase/Vercel settings, run the two-user test, connect the deployed `/mcp` endpoint in ChatGPT, and then integrate the feature branch into `dev`.
+- **Next action**: Review and merge the migration layout correction into `dev`, then apply the documented Supabase/Vercel settings, run the two-user test, and connect the deployed `/mcp` endpoint in ChatGPT.
