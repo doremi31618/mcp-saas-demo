@@ -7,7 +7,7 @@
 > **Branch**: `feat/MCP-001-web-supabase-layout`
 > **Base**: `dev` (`origin/dev` at `fa2dc7b`)
 > **Worktree**: `/Users/ericzhan/Documents/side-projects/mcp-saas-demo-worktrees/MCP-001-web-supabase-layout`
-> **PR**: Original implementation merged in PR #1; layout correction pending
+> **PR**: Original implementation merged in PR #1; layout correction [PR #2](https://github.com/doremi31618/mcp-saas-demo/pull/2)
 > **Related Spec**: `doc/system-spec/MCP-001-authenticated-notes/product-spec.md`, `doc/system-spec/MCP-001-authenticated-notes/technical-spec.md`
 > **Release**: Pending
 > **Last updated**: 2026-08-28
@@ -93,7 +93,7 @@ Prove the authenticated SaaS path from ChatGPT through OAuth 2.1 and an MCP serv
 - [x] Validation and security review
 - [x] Original implementation PR and reviewer handoff
 - [x] Original implementation integrated into `dev`
-- [ ] Migration layout correction PR and reviewer handoff
+- [x] Migration layout correction PR and reviewer handoff
 - [ ] Release note
 
 ## Decisions and Work Log
@@ -108,7 +108,7 @@ Prove the authenticated SaaS path from ChatGPT through OAuth 2.1 and an MCP serv
 
 ## Handoff
 
-- **Commit/PR**: Original implementation merged in PR #1; layout correction PR pending
+- **Commit/PR**: Original implementation merged in PR #1; layout correction commit `bf6ac08` in [PR #2](https://github.com/doremi31618/mcp-saas-demo/pull/2)
 - **Branch/Worktree**: `feat/MCP-001-web-supabase-layout` at `/Users/ericzhan/Documents/side-projects/mcp-saas-demo-worktrees/MCP-001-web-supabase-layout`
 - **Validation**: Migration SQL SHA-256 is unchanged; 13/13 focused tests, workspace package build, Svelte check (0 errors), and Vercel production build pass. Live OAuth and two-user RLS validation remain pending.
 - **Known issues**: Live Supabase/Vercel/ChatGPT configuration requires the project owner's authenticated dashboard access. Existing template CMS/editor files still emit non-blocking lint and Svelte accessibility warnings.
